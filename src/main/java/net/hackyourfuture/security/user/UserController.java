@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.hackyourfuture.security.user.dto.UserRequest;
 import net.hackyourfuture.security.user.dto.UserResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +25,11 @@ public class UserController {
         return userService.register(request);
     }
 
+
+
     @GetMapping("/profile")
-    public UserResponse profile() {
-        return userService.getProfile("REPLACE WITH CURRENTLY LOGGED IN USER ID");
+    public UserResponse profile(Authentication authentication) {
+
+        return userService.getProfile(authentication.getName());
     }
 }
